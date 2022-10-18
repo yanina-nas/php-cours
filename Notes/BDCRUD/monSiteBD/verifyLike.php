@@ -26,7 +26,7 @@ try {
 $sql = "SELECT * FROM utilisateur " . 
         " INNER JOIN favori ON utilisateur.id=favori.idUtilisateur" .        
         " WHERE favori.idFilm=:idFilm ";
-        //" AND utilisateur.login=:login";
+        // " AND utilisateur.login=:login";
 
 $stmt = $cnx->prepare($sql);
 // $stmt->bindValue(":login", $loginUtilisateur);

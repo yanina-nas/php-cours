@@ -35,7 +35,7 @@ function handleLike(event) {
         }
     };
     
-    xhr.open("GET", './traitementLike.php?id=' + new String(filmId) );
+    xhr.open("GET", './verifyLike.php?id=' + new String(filmId) );
     xhr.send(formulaire);
 };
 

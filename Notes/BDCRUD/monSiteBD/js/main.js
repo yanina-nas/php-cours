@@ -33,7 +33,7 @@ function initLikeButtonClasses() {
                     }
                 };
 
-                xhr[i].open("GET", `./traitementLike.php?id=${likeButtons[i].id}`);
+                xhr[i].open("GET", `./verifyLike.php?id=${likeButtons[i].id}`);
                 xhr[i].send();
             })(i);
         }
@@ -72,7 +72,7 @@ function addLikeListenersToAllButtons() {
                 }
             };
 
-            xhr.open("GET", `./traitementLike.php?id=${filmId}`);
+            xhr.open("GET", `./verifyLike.php?id=${filmId}`);
             xhr.send();
         }
         )
