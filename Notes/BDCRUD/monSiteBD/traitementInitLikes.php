@@ -23,13 +23,12 @@ try {
 
 
 // $titre = "%" . $_POST['titre'] . "%";
-$sql = "SELECT * FROM utilisateur " . 
-        " INNER JOIN favori ON utilisateur.id=favori.idUtilisateur" .        
-        " WHERE favori.idFilm=:idFilm ";
-        //" AND utilisateur.login=:login";
+$sql = "SELECT * FROM favori" .
+        " INNER JOIN utilisateur ON utilisateur.id = favori.idUtilisateur" .      
+        " WHERE favori.idFilm=:idFilm AND utilisateur.login=:login";
 
 $stmt = $cnx->prepare($sql);
-// $stmt->bindValue(":login", $loginUtilisateur);
+$stmt->bindValue(":login", $loginUtilisateur);
 $stmt->bindValue(":idFilm", $idFilm);
 $stmt->execute();
 

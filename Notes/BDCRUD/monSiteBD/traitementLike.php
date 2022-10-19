@@ -2,6 +2,7 @@
 session_start();
 $loginUtilisateur = $_SESSION['loginConnecte'];
 $idFilm = $_GET['id'];
+$deleteLike = $_GET['deleteLike'];
 
 // var_dump($idFilm);
 
@@ -21,15 +22,35 @@ try {
 }
 
 
+if ($deleteLike) {
+    $sql = "DELETE L FROM favori L" .
+    " INNER JOIN utilisateur U ON U.id = L.idUtilisateur" .
+    " WHERE L.idFilm=:idFilm AND U.login=:login";
+}
+else {
+    $sql = "INSERT INTO favori (id, idFilm, idUtilisateur) ";
+    $sql .= " SELECT id, :idFilm FROM utilisateur WHERE login=:login";
 
+    // INSERT INTO favori (id, idFilm, idUtilisateur)
+    // SELECT :id, :idFilm, id FROM utilisateur WHERE login=:login
+
+
+    // INSERT INTO favori (id, idFilm, idUtilisateur)
+// SELECT NULL, id, :idFilm FROM utilisateur WHERE login=:login
+
+    // $sql .= " VALUES (NULL, :idFilm, :idUtilisateur)";
+}
 // $titre = "%" . $_POST['titre'] . "%";
-$sql = "SELECT * FROM utilisateur " . 
-        " INNER JOIN favori ON utilisateur.id=favori.idUtilisateur" .        
-        " WHERE favori.idFilm=:idFilm ";
-        //" AND utilisateur.login=:login";
+// $sql = "SELECT * FROM favori" .
+//         " INNER JOIN utilisateur ON utilisateur.id = favori.idUtilisateur" .      
+//         " WHERE favori.idFilm=:idFilm AND utilisateur.login=:login";
+// DECLARE @Id INT
+// SET @Id = (SELECT id FROM utilisateur WHERE login=:login)
+// INSERT INTO favori (id, idFilm, idUtilisateur)
+// VALUES (NULL, :idFilm, @Id);
 
 $stmt = $cnx->prepare($sql);
-// $stmt->bindValue(":login", $loginUtilisateur);
+$stmt->bindValue(":login", $loginUtilisateur);
 $stmt->bindValue(":idFilm", $idFilm);
 $stmt->execute();
 

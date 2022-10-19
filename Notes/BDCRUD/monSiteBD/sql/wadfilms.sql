@@ -30,7 +30,7 @@ USE `wadfilms`;
 --
 
 CREATE TABLE `favori` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `idFilm` int(11) NOT NULL,
   `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
